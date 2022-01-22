@@ -44,8 +44,8 @@ com/bank/component/transaction/vo/ReturnRequestVo.java
  com.bank.component.transaction.vo.ReturnRequestVo$ReturnRequestVoBuilder
 com/bank/component/user/repository/AppUserRepository.java
  com.bank.component.user.repository.AppUserRepository
-com/bank/component/CoreModule.java
- com.bank.component.CoreModule
+com/bank/component/common/CommonResponseMaker.java
+ com.bank.component.common.CommonResponseMaker
 com/bank/component/transaction/vo/TransactionVo.java
  com.bank.component.transaction.vo.TransactionVo
  com.bank.component.transaction.vo.TransactionVo$TransactionVoBuilder
@@ -69,5 +69,5 @@ com/bank/component/user/domain/AppUser.java
  com.bank.component.user.domain.AppUser
 com/bank/component/transaction/domain/Transaction.java
  com.bank.component.transaction.domain.Transaction
-com/bank/component/common/CommonResponseMaker.java
- com.bank.component.common.CommonResponseMaker
+com/bank/component/CoreModule.java
+ com.bank.component.CoreModule

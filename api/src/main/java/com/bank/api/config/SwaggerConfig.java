@@ -24,9 +24,9 @@ public class SwaggerConfig {
 	private String title;
 
 	@Bean
-	public Docket apiV1() {
-		version = "V1";
-		title = "Swagger Example API " + version;
+	public Docket account_api() {
+		version = "account";
+		title = "Swagger account API " + version;
 
 		Parameter parameterBuilder = new ParameterBuilder()
 			.name(HttpHeaders.AUTHORIZATION)
@@ -44,28 +44,68 @@ public class SwaggerConfig {
 			.useDefaultResponseMessages(false)
 			.groupName(version)
 			.select()
-			.apis(RequestHandlerSelectors.basePackage("me.develop_han.loginService.api"))
+			.apis(RequestHandlerSelectors.basePackage("com.bank.api.account.controller"))
 			// .paths(PathSelectors.ant("/v1/customer/**"))
 			.build()
 			.apiInfo(apiInfo(title, version));
 
 	}
 
-	// @Bean
-	// public Docket apiV2() {
-	// 	version = "V2";
-	// 	title = "Swagger Example API " + version;
-	//
-	// 	return new Docket(DocumentationType.SWAGGER_2)
-	// 		.useDefaultResponseMessages(false)
-	// 		.groupName(version)
-	// 		.select()
-	// 		.apis(RequestHandlerSelectors.basePackage("com.example.swagger.v2"))
-	// 		// .paths(PathSelectors.ant("/v2/customer/**"))
-	// 		.build()
-	// 		.apiInfo(apiInfo(title, version));
-	//
-	// }
+	@Bean
+	public Docket user_api() {
+		version = "user";
+		title = "Swagger user API " + version;
+
+		Parameter parameterBuilder = new ParameterBuilder()
+			.name(HttpHeaders.AUTHORIZATION)
+			.description("Access Token")
+			.modelRef(new ModelRef("string"))
+			.parameterType("header")
+			.required(false)
+			.build();
+
+		List<Parameter> globalParamters = new ArrayList<>();
+		globalParamters.add(parameterBuilder);
+
+		return new Docket(DocumentationType.SWAGGER_2)
+			.globalOperationParameters(globalParamters)
+			.useDefaultResponseMessages(false)
+			.groupName(version)
+			.select()
+			.apis(RequestHandlerSelectors.basePackage("com.bank.api.user.controller"))
+			// .paths(PathSelectors.ant("/v1/customer/**"))
+			.build()
+			.apiInfo(apiInfo(title, version));
+
+	}
+
+	@Bean
+	public Docket transaction_api() {
+		version = "transaction";
+		title = "Swagger transaction API " + version;
+
+		Parameter parameterBuilder = new ParameterBuilder()
+			.name(HttpHeaders.AUTHORIZATION)
+			.description("Access Token")
+			.modelRef(new ModelRef("string"))
+			.parameterType("header")
+			.required(false)
+			.build();
+
+		List<Parameter> globalParamters = new ArrayList<>();
+		globalParamters.add(parameterBuilder);
+
+		return new Docket(DocumentationType.SWAGGER_2)
+			.globalOperationParameters(globalParamters)
+			.useDefaultResponseMessages(false)
+			.groupName(version)
+			.select()
+			.apis(RequestHandlerSelectors.basePackage("com.bank.api.transaction.controller"))
+			// .paths(PathSelectors.ant("/v1/customer/**"))
+			.build()
+			.apiInfo(apiInfo(title, version));
+
+	}
 
 	private ApiInfo apiInfo(String title, String version) {
 		return new ApiInfo(

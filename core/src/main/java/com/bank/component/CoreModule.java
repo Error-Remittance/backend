@@ -24,10 +24,6 @@ import org.springframework.web.client.RestTemplate;
 })
 public class CoreModule {
 
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
 
 	@Bean
 	public RestTemplate restTemplate() {

@@ -11,7 +11,6 @@ import com.bank.component.common.dto.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +23,6 @@ import java.io.IOException;
 public class SignController extends AppApiV1Controller {
 
 	private final AppUserService userService;
-	private final PasswordEncoder passwordEncoder;
 	private final CommonResponseMaker commonResponseMaker;
 
 	@PostMapping("/sign/complete")
