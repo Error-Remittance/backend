@@ -14,4 +14,21 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: create
-      show-sql: true
+    show-sql: true
+    open-in-view: false
+
+    properties:
+      hibernate: # custom options
+        format_sql: true # sql 로그를 포매팅해서 보여줌
+
+
+  출처: https://sanghaklee.tistory.com/65 [이상학의 개발블로그]
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
