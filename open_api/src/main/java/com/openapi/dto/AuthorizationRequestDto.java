@@ -1,8 +1,10 @@
 package com.openapi.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class AuthorizationRequestDto {
 	private String response_type;
 	private String client_id;
@@ -10,4 +12,5 @@ public class AuthorizationRequestDto {
 	private String scope;
 	private String state;
 	private String auth_type;
+
 }
