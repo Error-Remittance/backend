@@ -1,4 +1,5 @@
 rootProject.name = 'backend'
 include 'api'
 include 'core'
+include 'open_api'
 

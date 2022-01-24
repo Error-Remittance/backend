@@ -1,0 +1,8 @@
+openbank:
+  useCode : M202200139
+  openbank-api-url: https://openapi.openbanking.or.kr
+  openbank-api-test-url: https://testapi.openbanking.or.kr
+  redirect-uri: http://localhost:8080/test/app
+  client-id: 03366178-450b-46af-a2bf-8af076571fec
+  client-secret: c9b400bd-63dc-45a4-bc84-9d2dad8efa9c
+  access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAwNzcxMjYzIiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2MzcxNjY0ODksImp0aSI6IjhkMTk2YTIyLWRmMzYtNGM5Ny1hZTJlLTQzODBkMWUwZDI2OSJ9.m9HjX3543q699RM3lbeXZhmJUZqJTGDvbc8sOpdvJBc

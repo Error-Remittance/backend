@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="authorizeFrm" name="authorizeFrm" method="get" action="https://testapi.openbanking.or.kr/oauth/2.0/authorize" th:if="${access_token}==null">
+    <input type="hidden" name="client_id" th:value="${clientId}"/>
+    <input type="hidden" name="scope" value="login inquiry transfer"/>
+    <input type="hidden" name="redirect_uri" value="http://localhost:8080/auth/openbank/callback"/>
+    <input type="hidden" name="auth_type" value="0"/>
+    <input type="hidden" name="response_type" value="code"/>
+    <input type="hidden" name="state" value="12345678901234567890123456789012"/>
+    <button type="submit">토큰발급</button>
+</form>
+<p th:value="${#temporals.createNow()}"></p>
+<form id="acount" method="get" action="/acount/list">
+    <input type="hidden" id="token" name="access_token" th:value="${access_token}" value=""></input>
+    <input type="hidden" id="user_seq_no" name="user_seq_no" value="1100771263"></input>
+    <input type="hidden"  id="include_cancel_yn" name="include_cancel_yn" value="N"></input>
+    <input type="hidden"  id="sort_order" name="sort_order" value="D"></input>
+    <button type="submit">계좌조회</button>
+</form>
+</body>
+</html>
