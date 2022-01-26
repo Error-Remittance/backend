@@ -6,6 +6,8 @@ import com.openapi.api.OpenBankApiClient;
 import com.openapi.dto.AuthrozationResponseDto;
 import com.openapi.dto.BankRequestToken;
 import com.openapi.dto.BankResponseToken;
+import com.openapi.dto.RefreshTokenRequestDto;
+import com.openapi.dto.RefreshTokenResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,10 @@ public class OpenBankService {
 
 	public BankResponseToken requestToken(BankRequestToken bankRequestToken) {
 		return openBankApiClient.requestToken(bankRequestToken);
+	}
+
+	public RefreshTokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto){
+		return openBankApiClient.refreshToken(refreshTokenRequestDto);
 	}
 
 }

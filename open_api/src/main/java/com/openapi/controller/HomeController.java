@@ -14,6 +14,8 @@ import com.openapi.dto.AuthorizationRequestDto;
 import com.openapi.dto.AuthrozationResponseDto;
 import com.openapi.dto.BankRequestToken;
 import com.openapi.dto.BankResponseToken;
+import com.openapi.dto.RefreshTokenRequestDto;
+import com.openapi.dto.RefreshTokenResponseDto;
 import com.openapi.service.OpenBankService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,8 +31,14 @@ public class HomeController {
 	@Value("${openbank.client-id}")
 	private String clientId;
 
+	@Value("${openbank.access_token}")
+	private String accessToken;
+
+	@Value("${openbank.refresh_token}")
+	private String refreshToken;
+
 	@GetMapping("/")
-	public String index(){
+	public String index() {
 		return "/index";
 	}
 
@@ -51,6 +59,11 @@ public class HomeController {
 	// 	return commonResponseMaker.makeSucceedCommonResponse(bankResponseToken);
 	// }
 
-
+	@ResponseBody
+	@GetMapping("/token/refresh")
+	public CommonResponse<RefreshTokenResponseDto> refreshToken(RefreshTokenRequestDto requestDto) {
+		RefreshTokenResponseDto refreshTokenResponseDto = openBankService.refreshToken(requestDto);
+		return commonResponseMaker.makeSucceedCommonResponse(refreshTokenResponseDto);
+	}
 
 }

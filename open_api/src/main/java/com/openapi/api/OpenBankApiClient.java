@@ -14,6 +14,8 @@ import com.openapi.dto.AuthorizationRequestDto;
 import com.openapi.dto.AuthrozationResponseDto;
 import com.openapi.dto.BankRequestToken;
 import com.openapi.dto.BankResponseToken;
+import com.openapi.dto.RefreshTokenRequestDto;
+import com.openapi.dto.RefreshTokenResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +74,8 @@ public class OpenBankApiClient {
 		log.info("code : " + bankRequestToken.getCode());
 		// POST 방식
 		// HTTP header
-		httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		this.httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		bankRequestToken.setBankRequestToken(clientId, clientSecret, redirect_uri, "authorization_code");
 
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
@@ -82,9 +85,46 @@ public class OpenBankApiClient {
 		parameters.add("redirect_uri", bankRequestToken.getRedirect_uri());
 		parameters.add("grant_type", bankRequestToken.getGrant_type());
 
-		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
+		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, this.httpHeaders);
 
 		return restTemplate.exchange(base_url + "/oauth/2.0/token", HttpMethod.POST,
 			param, BankResponseToken.class).getBody();
+	}
+
+	/**
+	 * 토큰 갱신
+	 * 아직 시도는 안해봄₩
+	 */
+	public RefreshTokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto) {
+		// POST 방식, 호출 uri : /oauth/2.0/token
+		// Header 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("Content_type", "application/x-www-form-urlencoded;charset=UTF-8");
+		// Body 설정
+
+		refreshTokenRequestDto.setRefreshTokenRequestDto(clientId, clientSecret, "login inquiry transfer",
+			"refresh_token");
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("client_id", refreshTokenRequestDto.getClient_id());
+		parameters.add("client_secret", refreshTokenRequestDto.getClient_secret());
+		parameters.add("refresh_token", refreshTokenRequestDto.getRefresh_token());
+		parameters.add("scope", refreshTokenRequestDto.getScope());
+		parameters.add("grant_type", refreshTokenRequestDto.getGrant_type());
+
+		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
+
+		return restTemplate.exchange(base_url + "/oauth/2.0/token",HttpMethod.POST,param,RefreshTokenResponseDto.class).getBody();
+
+	}
+
+	/**
+	 * 헤더에 엑세스 토큰넣기
+	 * @param access_token
+	 * @return
+	 */
+	public HttpHeaders setHeader(String access_token) {
+		HttpHeaders httpHeaders = new HttpHeaders();
+		this.httpHeaders.add("Authorization", "Bearer " + access_token);
+		return this.httpHeaders;
 	}
 }

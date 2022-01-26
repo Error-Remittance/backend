@@ -13,8 +13,4 @@ public class config {
 		return new RestTemplate();
 	}
 
-	@Bean
-	public HttpHeaders httpHeaders(){
-		return new HttpHeaders();
-	}
 }
