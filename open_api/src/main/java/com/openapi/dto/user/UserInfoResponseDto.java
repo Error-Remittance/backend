@@ -19,5 +19,5 @@ public class UserInfoResponseDto {
 	private String user_cell_no; // (선택) 휴대폰 번호
 	private String user_email; // (선택) 이메일 주소
 	private int res_cnt; // 등록된 계좌 개수
-	private List<AccountInfo> res_list;
+	private List<AccountDto> res_list;
 }

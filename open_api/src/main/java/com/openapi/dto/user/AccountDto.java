@@ -3,10 +3,10 @@ package com.openapi.dto.user;
 import lombok.Data;
 
 @Data
-public class AccountInfo {
+public class AccountDto {
 	// N(14) 의 의미를 알아봐야 겠다.
 	private String fintech_use_num; // 핀테크이용번호
-	private String coount_alias; // 계좌 별명(alias)
+	private String acoount_alias; // 계좌 별명(alias)
 	private String bank_code_std; // 출금(개설) 기관.표준코드
 	private String bank_code_sub; // 출금(개설) 기관.점별코드
 	private String bank_name; // 출금(개설) 기관명
