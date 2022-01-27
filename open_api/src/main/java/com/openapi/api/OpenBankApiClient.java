@@ -4,18 +4,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.openapi.dto.AuthorizationRequestDto;
-import com.openapi.dto.AuthrozationResponseDto;
-import com.openapi.dto.BankRequestToken;
-import com.openapi.dto.BankResponseToken;
-import com.openapi.dto.RefreshTokenRequestDto;
-import com.openapi.dto.RefreshTokenResponseDto;
+import com.openapi.dto.oauth.AuthorizationRequestDto;
+import com.openapi.dto.oauth.AuthrozationResponseDto;
+import com.openapi.dto.oauth.IssueTokenRequestDto;
+import com.openapi.dto.oauth.IssueTokenResponseDto;
+import com.openapi.dto.oauth.RefreshTokenRequestDto;
+import com.openapi.dto.oauth.RefreshTokenResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -69,25 +68,25 @@ public class OpenBankApiClient {
 	/**
 	 * 토큰 발급 요청
 	 */
-	public BankResponseToken requestToken(BankRequestToken bankRequestToken) {
-		log.info("code : " + bankRequestToken.getCode());
+	public IssueTokenResponseDto requestToken(IssueTokenRequestDto issueTokenRequestDto) {
+		log.info("code : " + issueTokenRequestDto.getCode());
 		// POST 방식
 		// HTTP header
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-		bankRequestToken.setBankRequestToken(clientId, clientSecret, redirect_uri, "authorization_code");
+		issueTokenRequestDto.setBankRequestToken(clientId, clientSecret, redirect_uri, "authorization_code");
 
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("code", bankRequestToken.getCode());
-		parameters.add("client_id", bankRequestToken.getClient_id());
-		parameters.add("client_secret", bankRequestToken.getClient_secret());
-		parameters.add("redirect_uri", bankRequestToken.getRedirect_uri());
-		parameters.add("grant_type", bankRequestToken.getGrant_type());
+		parameters.add("code", issueTokenRequestDto.getCode());
+		parameters.add("client_id", issueTokenRequestDto.getClient_id());
+		parameters.add("client_secret", issueTokenRequestDto.getClient_secret());
+		parameters.add("redirect_uri", issueTokenRequestDto.getRedirect_uri());
+		parameters.add("grant_type", issueTokenRequestDto.getGrant_type());
 
 		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
 
 		return restTemplate.exchange(base_url + "/oauth/2.0/token", HttpMethod.POST,
-			param, BankResponseToken.class).getBody();
+			param, IssueTokenResponseDto.class).getBody();
 	}
 
 	/**

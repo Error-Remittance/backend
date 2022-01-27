@@ -1,9 +1,9 @@
-package com.openapi.dto;
+package com.openapi.dto.oauth;
 
 import lombok.Data;
 
 @Data
-public class BankRequestToken {
+public class IssueTokenRequestDto {
 	private String code; // 사용자인증 성공 후 획득한 Authorization Code
 	private String client_id;
 	private String client_secret;

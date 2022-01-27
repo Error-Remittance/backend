@@ -3,19 +3,13 @@ package com.openapi.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.component.common.CommonResponseMaker;
 import com.bank.component.common.dto.CommonResponse;
 import com.openapi.api.OpenBankUtil;
-import com.openapi.dto.AuthorizationRequestDto;
-import com.openapi.dto.AuthrozationResponseDto;
-import com.openapi.dto.BankRequestToken;
-import com.openapi.dto.BankResponseToken;
-import com.openapi.dto.RefreshTokenRequestDto;
-import com.openapi.dto.RefreshTokenResponseDto;
+import com.openapi.dto.oauth.RefreshTokenRequestDto;
+import com.openapi.dto.oauth.RefreshTokenResponseDto;
 import com.openapi.service.OpenBankService;
 
 import lombok.RequiredArgsConstructor;

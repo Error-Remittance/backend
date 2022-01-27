@@ -1,9 +1,9 @@
-package com.openapi.dto;
+package com.openapi.dto.oauth;
 
 import lombok.Data;
 
 @Data
-public class BankResponseToken {
+public class IssueTokenResponseDto {
 	private String access_token;
 	private String refresh_token;
 	private String token_type; // 고정값 : Bearer

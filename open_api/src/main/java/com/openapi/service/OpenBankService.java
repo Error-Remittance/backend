@@ -3,11 +3,11 @@ package com.openapi.service;
 import org.springframework.stereotype.Service;
 
 import com.openapi.api.OpenBankApiClient;
-import com.openapi.dto.AuthrozationResponseDto;
-import com.openapi.dto.BankRequestToken;
-import com.openapi.dto.BankResponseToken;
-import com.openapi.dto.RefreshTokenRequestDto;
-import com.openapi.dto.RefreshTokenResponseDto;
+import com.openapi.dto.oauth.AuthrozationResponseDto;
+import com.openapi.dto.oauth.IssueTokenRequestDto;
+import com.openapi.dto.oauth.IssueTokenResponseDto;
+import com.openapi.dto.oauth.RefreshTokenRequestDto;
+import com.openapi.dto.oauth.RefreshTokenResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,8 +21,8 @@ public class OpenBankService {
 		return openBankApiClient.authrizationClient();
 	}
 
-	public BankResponseToken requestToken(BankRequestToken bankRequestToken) {
-		return openBankApiClient.requestToken(bankRequestToken);
+	public IssueTokenResponseDto requestToken(IssueTokenRequestDto issueTokenRequestDto) {
+		return openBankApiClient.requestToken(issueTokenRequestDto);
 	}
 
 	public RefreshTokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto){

@@ -1,16 +1,12 @@
 package com.openapi.controller;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.openapi.dto.BankRequestToken;
-import com.openapi.dto.BankResponseToken;
-import com.openapi.dto.RefreshTokenRequestDto;
-import com.openapi.dto.RefreshTokenResponseDto;
+import com.openapi.dto.oauth.IssueTokenRequestDto;
+import com.openapi.dto.oauth.IssueTokenResponseDto;
 import com.openapi.service.OpenBankService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@Controller
+@RestController
+// @Controller
 class OpenBankApiController {
 
 	private final OpenBankService openBankService;
@@ -54,17 +51,26 @@ class OpenBankApiController {
 
 	private String redirect_uri = "http://localhost:8080/auth/openbank/callback";
 
-	/**
-	 * 토큰요청
-	 * @param model
-	 * @return
-	 */
+	// /**
+	//  * 토큰요청
+	//  * @param model
+	//  * @return
+	//  */
+	// @GetMapping("/auth/openbank/callback")
+	// public String getToken(BankRequestToken bankRequestToken, Model model) {
+	// 	BankResponseToken token = openBankService.requestToken(bankRequestToken);
+	// 	model.addAttribute("bankReponseToken", token);
+	// 	log.info("bankReponseToken={}", token);
+	// 	return "v1/bank";
+	// }
+
+	@ResponseBody
 	@GetMapping("/auth/openbank/callback")
-	public String getToken(BankRequestToken bankRequestToken, Model model) {
-		BankResponseToken token = openBankService.requestToken(bankRequestToken);
-		model.addAttribute("bankReponseToken", token);
-		log.info("bankReponseToken={}", token);
-		return "v1/bank";
+	public String getToken(IssueTokenRequestDto issueTokenRequestDto) {
+		IssueTokenResponseDto token = openBankService.requestToken(issueTokenRequestDto);
+		return "access-token : " + token.getAccess_token() +
+			"\nrefresh-tokne : " + token.getRefresh_token() +
+			"\nuser_seq_no : " + token.getUser_seq_no();
 	}
 
 

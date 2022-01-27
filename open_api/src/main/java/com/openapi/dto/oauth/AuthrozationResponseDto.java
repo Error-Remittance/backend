@@ -1,4 +1,4 @@
-package com.openapi.dto;
+package com.openapi.dto.oauth;
 
 import lombok.Data;
 
