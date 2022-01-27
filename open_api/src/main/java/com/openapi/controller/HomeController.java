@@ -31,10 +31,10 @@ public class HomeController {
 	@Value("${openbank.client-id}")
 	private String clientId;
 
-	@Value("${openbank.access_token}")
+	@Value("${openbank.access-token}")
 	private String accessToken;
 
-	@Value("${openbank.refresh_token}")
+	@Value("${openbank.refresh-token}")
 	private String refreshToken;
 
 	@GetMapping("/")

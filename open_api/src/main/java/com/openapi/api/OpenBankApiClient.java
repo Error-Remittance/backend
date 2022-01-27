@@ -26,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 public class OpenBankApiClient {
 
 	private final OpenBankUtil openBankUtil;
-	private final HttpHeaders httpHeaders;
 	private final RestTemplate restTemplate;
 
 	@Value("${openbank.useCode}")
@@ -75,7 +74,7 @@ public class OpenBankApiClient {
 		// POST 방식
 		// HTTP header
 		HttpHeaders httpHeaders = new HttpHeaders();
-		this.httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+		httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		bankRequestToken.setBankRequestToken(clientId, clientSecret, redirect_uri, "authorization_code");
 
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
@@ -85,7 +84,7 @@ public class OpenBankApiClient {
 		parameters.add("redirect_uri", bankRequestToken.getRedirect_uri());
 		parameters.add("grant_type", bankRequestToken.getGrant_type());
 
-		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, this.httpHeaders);
+		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
 
 		return restTemplate.exchange(base_url + "/oauth/2.0/token", HttpMethod.POST,
 			param, BankResponseToken.class).getBody();
@@ -124,7 +123,7 @@ public class OpenBankApiClient {
 	 */
 	public HttpHeaders setHeader(String access_token) {
 		HttpHeaders httpHeaders = new HttpHeaders();
-		this.httpHeaders.add("Authorization", "Bearer " + access_token);
-		return this.httpHeaders;
+		httpHeaders.add("Authorization", "Bearer " + access_token);
+		return httpHeaders;
 	}
 }
