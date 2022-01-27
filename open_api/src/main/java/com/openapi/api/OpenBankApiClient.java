@@ -15,6 +15,8 @@ import com.openapi.dto.oauth.IssueTokenRequestDto;
 import com.openapi.dto.oauth.IssueTokenResponseDto;
 import com.openapi.dto.oauth.RefreshTokenRequestDto;
 import com.openapi.dto.oauth.RefreshTokenResponseDto;
+import com.openapi.dto.user.UserInfoRequestDto;
+import com.openapi.dto.user.UserInfoResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +71,8 @@ public class OpenBankApiClient {
 	 * 토큰 발급 요청
 	 */
 	public IssueTokenResponseDto requestToken(IssueTokenRequestDto issueTokenRequestDto) {
-		log.info("code : " + issueTokenRequestDto.getCode());
+		log.info("request token start");
+		log.info("code : {}", issueTokenRequestDto.getCode());
 		// POST 방식
 		// HTTP header
 		HttpHeaders httpHeaders = new HttpHeaders();
@@ -94,6 +97,7 @@ public class OpenBankApiClient {
 	 * 아직 시도는 안해봄₩
 	 */
 	public RefreshTokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto) {
+		log.info("refresh token start");
 		// POST 방식, 호출 uri : /oauth/2.0/token
 		// Header 설정
 		HttpHeaders httpHeaders = new HttpHeaders();
@@ -111,7 +115,30 @@ public class OpenBankApiClient {
 
 		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
 
-		return restTemplate.exchange(base_url + "/oauth/2.0/token",HttpMethod.POST,param,RefreshTokenResponseDto.class).getBody();
+		return restTemplate.exchange(base_url + "/oauth/2.0/token", HttpMethod.POST, param,
+			RefreshTokenResponseDto.class).getBody();
+	}
+
+	/**
+	 * 시도해 봐야 함
+	 * @param userInfoRequestDto
+	 * @return
+	 */
+	public UserInfoResponseDto requestUserInfo(UserInfoRequestDto userInfoRequestDto) {
+		log.info("request User info start");
+		log.info("user_seq_no : {}" , userInfoRequestDto.getUser_seq_no());
+
+		// Header 설정
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAxMDAyOTU2Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2NTEwNDI3OTMsImp0aSI6ImYyZjE1MDRmLTRhZTItNGY5NS1iOTg1LWZmMjNjNmMxMmJkMSJ9.kdpltOUlJxJncygVC9RHutrrWrkcmmDRay0KaMuPDQM");
+
+		// Body 설정
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("user_seq_no", userInfoRequestDto.getUser_seq_no());
+
+		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, null);
+
+		return restTemplate.exchange(base_url + "/user/me", HttpMethod.GET, param, UserInfoResponseDto.class).getBody();
 
 	}
 

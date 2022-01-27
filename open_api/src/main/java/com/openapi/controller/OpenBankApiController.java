@@ -2,11 +2,16 @@ package com.openapi.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bank.component.common.CommonResponseMaker;
+import com.bank.component.common.dto.CommonResponse;
 import com.openapi.dto.oauth.IssueTokenRequestDto;
 import com.openapi.dto.oauth.IssueTokenResponseDto;
+import com.openapi.dto.user.UserInfoRequestDto;
+import com.openapi.dto.user.UserInfoResponseDto;
 import com.openapi.service.OpenBankService;
 
 import lombok.RequiredArgsConstructor;
@@ -15,10 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-// @Controller
 class OpenBankApiController {
 
 	private final OpenBankService openBankService;
+	private final CommonResponseMaker commonResponseMaker;
 
 	/**
 	 * clientID = 03366178-450b-46af-a2bf-8af076571fec
@@ -73,8 +78,11 @@ class OpenBankApiController {
 			"\nuser_seq_no : " + token.getUser_seq_no();
 	}
 
-
-
-
+	@GetMapping("/user/{user_seq_no}")
+	public CommonResponse<UserInfoResponseDto> getUserInfo(@PathVariable String user_seq_no) {
+		UserInfoRequestDto userInfoRequestDto = new UserInfoRequestDto();
+		userInfoRequestDto.setUser_seq_no(user_seq_no);
+		return commonResponseMaker.makeSucceedCommonResponse(openBankService.requestUserInfo(userInfoRequestDto));
+	}
 
 }
