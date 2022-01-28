@@ -18,8 +18,8 @@ public class AccountDto {
 	private String account_holder_type; // 계좌구분(P:개인)
 	private String account_type; // 계좌종류 1:수시입출금, 2:예적금 6: 수익증권, T:종합계좌
 	private String inquiry_agree_yn; // 조회서비스 동의여부
-	private int inquiry_agree_dtime; // 조회서비스 동의 일시
+	private String inquiry_agree_dtime; // 조회서비스 동의 일시
 	private String tranfer_agree_yn; // 출금서비스 동의 여부
-	private int transfer_agree_dtime; // 출금서비스 동의 일시
+	private String transfer_agree_dtime; // 출금서비스 동의 일시
 	private String payer_num; // 납부자 번호
 }

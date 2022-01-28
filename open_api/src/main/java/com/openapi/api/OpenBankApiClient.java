@@ -35,6 +35,8 @@ public class OpenBankApiClient {
 	private String clientId;
 	@Value("${openbank.client-secret}")
 	private String clientSecret;
+	@Value("${openbank.access-token}")
+	private String accessToken;
 
 	private final String redirect_uri = "http://localhost:8080/auth/openbank/callback";
 	private final String base_url = "https://testapi.openbanking.or.kr";
@@ -129,16 +131,16 @@ public class OpenBankApiClient {
 		log.info("user_seq_no : {}" , userInfoRequestDto.getUser_seq_no());
 
 		// Header 설정
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAxMDAyOTU2Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2NTEwNDI3OTMsImp0aSI6ImYyZjE1MDRmLTRhZTItNGY5NS1iOTg1LWZmMjNjNmMxMmJkMSJ9.kdpltOUlJxJncygVC9RHutrrWrkcmmDRay0KaMuPDQM");
+		HttpHeaders httpHeaders = makeAccessTokenHeader(accessToken);
+		log.info("Authorization : {}",httpHeaders.get("Authorization"));
 
-		// Body 설정
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("user_seq_no", userInfoRequestDto.getUser_seq_no());
+		// Body 설정 -> 왜 파라미터로 넘기면 안될까?
+		// MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		// parameters.add("user_seq_no", userInfoRequestDto.getUser_seq_no());
 
-		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, null);
+		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(null, httpHeaders);
 
-		return restTemplate.exchange(base_url + "/user/me", HttpMethod.GET, param, UserInfoResponseDto.class).getBody();
+		return restTemplate.exchange(base_url + "/v2.0/user/me?user_seq_no=" + userInfoRequestDto.getUser_seq_no() , HttpMethod.GET, param, UserInfoResponseDto.class).getBody();
 
 	}
 
@@ -147,7 +149,7 @@ public class OpenBankApiClient {
 	 * @param access_token
 	 * @return
 	 */
-	public HttpHeaders setHeader(String access_token) {
+	public HttpHeaders makeAccessTokenHeader(String access_token) {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Authorization", "Bearer " + access_token);
 		return httpHeaders;
