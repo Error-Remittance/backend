@@ -25,5 +25,5 @@ public class TransferApiService {
 	private String accessToken;
 
 	private final String redirect_uri = "http://localhost:8080/auth/openbank/callback";
-	private final String base_url = "https://testapi.openbanking.or.kr";
+	private final String base_url = "https://testapi.openbanking.or.kr/v2.0";
 }

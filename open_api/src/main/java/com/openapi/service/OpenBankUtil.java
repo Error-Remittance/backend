@@ -13,14 +13,14 @@ public class OpenBankUtil {
 	 * 은행 거래 고유번호 랜덤 생성
 	 */
 
-	public String getRandomNumber(String bank_tran_id) {
+	public String getRandomNumber(String useCode) {
 
 		Random rand = new Random();
 		String rst = Integer.toString(rand.nextInt(8) + 1);
 		for (int i = 0; i < 8; i++) {
 			rst += Integer.toString(rand.nextInt(9));
 		}
-		return bank_tran_id + rst;
+		return useCode +"U" +  rst;
 	}
 
 	/**

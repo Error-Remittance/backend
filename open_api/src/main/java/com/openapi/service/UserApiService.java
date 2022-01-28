@@ -32,16 +32,16 @@ public class UserApiService {
 	private String accessToken;
 
 	private final String redirect_uri = "http://localhost:8080/auth/openbank/callback";
-	private final String base_url = "https://testapi.openbanking.or.kr";
+	private final String base_url = "https://testapi.openbanking.or.kr/v2.0";
 
 	/**
 	 * 사용자정보조회
 	 */
 	public UserInfoResponseDto requestUserInfo(UserInfoRequestDto userInfoRequestDto) {
-		String url = base_url + "/v2.0/user/me";
+		String url = base_url + "/user/me";
 		HttpEntity<Object> openBankUserInfoRequest = new HttpEntity<>(openBankUtil.makeAccessTokenHeader(accessToken));
 		UriComponents builder = UriComponentsBuilder.fromHttpUrl(url)
-			.queryParam("user_seqq_no", userInfoRequestDto.getUser_seq_no())
+			.queryParam("user_seq_no", userInfoRequestDto.getUser_seq_no())
 			.build();
 
 		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET,

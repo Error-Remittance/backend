@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class AccountTransactionListResponseDto {
 	private String api_tran_id; // 거래고유번호(API)
-	private int api_tran_dtm; // 거래일시(밀리세컨드) int, long 등 뭘 쓸지 고민해야함
+	private String api_tran_dtm; // 거래일시(밀리세컨드) int, long 등 뭘 쓸지 고민해야함
 	private String rsp_code; // 응답 코드(API)
 	private String rsp_message; // 응답 메세지(API)
 	private String bank_tran_id; // 거래고유번호(참가은행)

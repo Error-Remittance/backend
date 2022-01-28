@@ -10,8 +10,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.openapi.dto.account.AccountListRequestDto;
 import com.openapi.dto.account.AccountListResponseDto;
+import com.openapi.dto.account.AccountTransactionListRequestDto;
+import com.openapi.dto.account.AccountTransactionListResponseDto;
 import com.openapi.dto.account.InquiryBalanceRequestDto;
-import com.openapi.dto.account.InquiryBanlaceResponseDto;
+import com.openapi.dto.account.InquiryBalanceResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +36,7 @@ public class AccountApiService {
 	private String accessToken;
 
 	private final String redirect_uri = "http://localhost:8080/auth/openbank/callback";
-	private final String base_url = "https://testapi.openbanking.or.kr";
+	private final String base_url = "https://testapi.openbanking.or.kr/v2.0";
 
 	/**
 	 * 사용자 계좌 조회
@@ -43,7 +45,7 @@ public class AccountApiService {
 		// Default 값 세팅
 		accountListRequestDto.setAccountListRequestDto("Y", "D");
 
-		String url = base_url + "/v2.0/account/list";
+		String url = base_url + "/account/list";
 		HttpEntity<String> openBankAcountSerchRequest = new HttpEntity<>(
 			openBankUtil.makeAccessTokenHeader(accessToken));
 		UriComponents builder = UriComponentsBuilder.fromHttpUrl(url)
@@ -58,21 +60,50 @@ public class AccountApiService {
 
 	/**
 	 * 잔액조회
-	 * 핀테크 이용 번호?
 	 */
-	public InquiryBanlaceResponseDto requestBalance(InquiryBalanceRequestDto inquiryBalanceRequestDto) {
+	public InquiryBalanceResponseDto requestBalance(InquiryBalanceRequestDto inquiryBalanceRequestDto) {
 		String url = base_url + "/account/balance/fin_num";
 		HttpEntity<String> balance = new HttpEntity<>(openBankUtil.makeAccessTokenHeader(accessToken));
 		inquiryBalanceRequestDto.setInquiryBalanceRequestDto(
-			openBankUtil.getRandomNumber(inquiryBalanceRequestDto.getBank_tran_id()),
+			makeBankTranId(useCode),
 			openBankUtil.getTransTime());
+
 		UriComponents builder = UriComponentsBuilder.fromHttpUrl(url)
 			.queryParam("bank_tran_id", inquiryBalanceRequestDto.getBank_tran_id())
 			.queryParam("fintech_use_num", inquiryBalanceRequestDto.getFintech_use_num())
 			.queryParam("tran_dtime", inquiryBalanceRequestDto.getTran_dtime())
 			.build();
 
-		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, balance, InquiryBanlaceResponseDto.class)
+		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, balance, InquiryBalanceResponseDto.class)
 			.getBody();
 	}
+
+	/**
+	 * 거래내역조회
+	 */
+	public AccountTransactionListResponseDto requestTransactionList(
+		AccountTransactionListRequestDto accountTransactionListRequestDto) {
+		String url = base_url + "/account/transaction_list/fin_num";
+		HttpEntity<String> transaction = new HttpEntity<>(openBankUtil.makeAccessTokenHeader(accessToken));
+		accountTransactionListRequestDto.setAccountTransactionListRequestDto(makeBankTranId(useCode),
+			"A", "D", "D", openBankUtil.getTransTime());
+		UriComponents builder = UriComponentsBuilder.fromHttpUrl(url)
+			.queryParam("bank_tran_id", accountTransactionListRequestDto.getBank_tran_id())
+			.queryParam("fintech_use_num", accountTransactionListRequestDto.getFintech_use_num())
+			.queryParam("inquiry_type", accountTransactionListRequestDto.getInquiry_type())
+			.queryParam("inquiry_base", accountTransactionListRequestDto.getInquiry_base())
+			.queryParam("from_date", accountTransactionListRequestDto.getFrom_date())
+			.queryParam("to_date", accountTransactionListRequestDto.getTo_date())
+			.queryParam("sort_order", accountTransactionListRequestDto.getSort_order())
+			.queryParam("tran_dtime", accountTransactionListRequestDto.getTran_dtime())
+			.build();
+
+		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, transaction, AccountTransactionListResponseDto.class)
+			.getBody();
+	}
+
+	private String makeBankTranId(String use_code) {
+		return openBankUtil.getRandomNumber(use_code);
+	}
+
 }
