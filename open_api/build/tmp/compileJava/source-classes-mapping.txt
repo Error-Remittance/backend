@@ -39,12 +39,10 @@ com/openapi/dto/account/AccountListResponseDto.java
  com.openapi.dto.account.AccountListResponseDto
 com/openapi/dto/account/ResignAccountRequestDto.java
  com.openapi.dto.account.ResignAccountRequestDto
-com/openapi/dto/account/AccountListRequestDto.java
- com.openapi.dto.account.AccountListRequestDto
-com/openapi/dto/account/ResignAccountResponseDto.java
- com.openapi.dto.account.ResignAccountResponseDto
 com/openapi/dto/user/AccountDto.java
  com.openapi.dto.user.AccountDto
+com/openapi/dto/account/ResignAccountResponseDto.java
+ com.openapi.dto.account.ResignAccountResponseDto
 com/openapi/service/OpenBankService.java
  com.openapi.service.OpenBankService
 com/openapi/controller/OpenBankApiController.java
@@ -53,3 +51,5 @@ com/openapi/api/OpenBankApiClient.java
  com.openapi.api.OpenBankApiClient
 com/openapi/controller/HomeController.java
  com.openapi.controller.HomeController
+com/openapi/dto/account/AccountListRequestDto.java
+ com.openapi.dto.account.AccountListRequestDto

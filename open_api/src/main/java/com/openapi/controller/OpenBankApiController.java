@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.component.common.CommonResponseMaker;
 import com.bank.component.common.dto.CommonResponse;
+import com.openapi.dto.account.AccountListRequestDto;
+import com.openapi.dto.account.AccountListResponseDto;
 import com.openapi.dto.oauth.IssueTokenRequestDto;
 import com.openapi.dto.oauth.IssueTokenResponseDto;
 import com.openapi.dto.user.UserInfoRequestDto;
@@ -83,6 +85,14 @@ class OpenBankApiController {
 		UserInfoRequestDto userInfoRequestDto = new UserInfoRequestDto();
 		userInfoRequestDto.setUser_seq_no(user_seq_no);
 		return commonResponseMaker.makeSucceedCommonResponse(openBankService.requestUserInfo(userInfoRequestDto));
+	}
+
+	@GetMapping("/account/list/{user_seq_no}")
+	public CommonResponse<AccountListResponseDto> getUserAccountList(@PathVariable String user_seq_no) {
+		AccountListRequestDto accountListRequestDto = new AccountListRequestDto();
+		accountListRequestDto.setUser_seq_no(user_seq_no);
+		return commonResponseMaker.makeSucceedCommonResponse(
+			openBankService.requestUserAccountList(accountListRequestDto));
 	}
 
 }

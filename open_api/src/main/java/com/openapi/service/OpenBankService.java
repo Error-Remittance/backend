@@ -3,6 +3,8 @@ package com.openapi.service;
 import org.springframework.stereotype.Service;
 
 import com.openapi.api.OpenBankApiClient;
+import com.openapi.dto.account.AccountListRequestDto;
+import com.openapi.dto.account.AccountListResponseDto;
 import com.openapi.dto.oauth.AuthrozationResponseDto;
 import com.openapi.dto.oauth.IssueTokenRequestDto;
 import com.openapi.dto.oauth.IssueTokenResponseDto;
@@ -33,6 +35,10 @@ public class OpenBankService {
 
 	public UserInfoResponseDto requestUserInfo(UserInfoRequestDto userInfoRequestDto){
 		return openBankApiClient.requestUserInfo(userInfoRequestDto);
+	}
+
+	public AccountListResponseDto requestUserAccountList(AccountListRequestDto accountListRequestDto) {
+		return openBankApiClient.requestUserAccountList(accountListRequestDto);
 	}
 
 }

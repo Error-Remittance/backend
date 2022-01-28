@@ -9,6 +9,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.openapi.dto.account.AccountListRequestDto;
+import com.openapi.dto.account.AccountListResponseDto;
 import com.openapi.dto.oauth.AuthorizationRequestDto;
 import com.openapi.dto.oauth.AuthrozationResponseDto;
 import com.openapi.dto.oauth.IssueTokenRequestDto;
@@ -128,11 +130,10 @@ public class OpenBankApiClient {
 	 */
 	public UserInfoResponseDto requestUserInfo(UserInfoRequestDto userInfoRequestDto) {
 		log.info("request User info start");
-		log.info("user_seq_no : {}" , userInfoRequestDto.getUser_seq_no());
+		log.info("user_seq_no : {}", userInfoRequestDto.getUser_seq_no());
 
 		// Header 설정
 		HttpHeaders httpHeaders = makeAccessTokenHeader(accessToken);
-		log.info("Authorization : {}",httpHeaders.get("Authorization"));
 
 		// Body 설정 -> 왜 파라미터로 넘기면 안될까?
 		// MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
@@ -140,8 +141,28 @@ public class OpenBankApiClient {
 
 		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(null, httpHeaders);
 
-		return restTemplate.exchange(base_url + "/v2.0/user/me?user_seq_no=" + userInfoRequestDto.getUser_seq_no() , HttpMethod.GET, param, UserInfoResponseDto.class).getBody();
+		return restTemplate.exchange(base_url + "/v2.0/user/me?user_seq_no=" + userInfoRequestDto.getUser_seq_no(),
+			HttpMethod.GET, param, UserInfoResponseDto.class).getBody();
+	}
 
+	public AccountListResponseDto requestUserAccountList(AccountListRequestDto accountListRequestDto) {
+		log.info("request User info start");
+		// Default 값 세팅
+		accountListRequestDto.setAccountListRequestDto("Y","D");
+
+		// Header 설정
+		HttpHeaders httpHeaders = makeAccessTokenHeader(accessToken);
+
+		// Body 설정 -> 왜 파라미터로 넘기면 안될까?
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("user_seq_no", accountListRequestDto.getUser_seq_no());
+		parameters.add("include_cancel_yn", accountListRequestDto.getInclude_cancel_yn());
+		parameters.add("sort_order", accountListRequestDto.getSort_order());
+
+		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
+
+		return restTemplate.exchange(base_url + "/v2.0/account/list" + accountListRequestDto.getUser_seq_no(),
+			HttpMethod.GET, param, AccountListResponseDto.class).getBody();
 	}
 
 	/**
