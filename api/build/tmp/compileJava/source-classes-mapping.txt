@@ -93,8 +93,8 @@ com/bank/api/transaction/dto/TransactionDto.java
  com.bank.api.transaction.dto.TransactionDto$TransactionDtoBuilder
 com/bank/openbank/dto/AccountTransferResponseDto.java
  com.bank.openbank.dto.AccountTransferResponseDto
-com/bank/api/BankApplication.java
- com.bank.api.BankApplication
+com/bank/api/user/controller/SignController.java
+ com.bank.api.user.controller.SignController
 com/bank/openbank/api/OpenBankUtil.java
  com.bank.openbank.api.OpenBankUtil
 com/bank/openbank/dto/AuthorizationResponseDto.java
@@ -112,5 +112,5 @@ com/bank/openbank/dto/BankBalanceRequestDto.java
  com.bank.openbank.dto.BankBalanceRequestDto
 com/bank/openbank/OpenBankApiController.java
  com.bank.openbank.OpenBankApiController
-com/bank/api/user/controller/SignController.java
- com.bank.api.user.controller.SignController
+com/bank/api/BankApplication.java
+ com.bank.api.BankApplication

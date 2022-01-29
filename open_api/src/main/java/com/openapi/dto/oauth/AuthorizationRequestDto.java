@@ -1,10 +1,11 @@
 package com.openapi.dto.oauth;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
+@AllArgsConstructor
 public class AuthorizationRequestDto {
 	private String response_type;
 	private String client_id;

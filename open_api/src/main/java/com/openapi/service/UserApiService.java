@@ -2,14 +2,19 @@ package com.openapi.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.openapi.dto.user.UserInfoRequestDto;
 import com.openapi.dto.user.UserInfoResponseDto;
+import com.openapi.dto.user.UserUnlinkRequestDto;
+import com.openapi.dto.user.UserUnlinkResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,4 +52,30 @@ public class UserApiService {
 		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET,
 			openBankUserInfoRequest, UserInfoResponseDto.class).getBody();
 	}
+
+	/**
+	 * 사용자 탈퇴
+	 */
+	public UserUnlinkResponseDto unlinkUser(UserUnlinkRequestDto userUnlinkRequestDto) {
+		userUnlinkRequestDto.setUserUnlinkRequestDto(useCode);
+		log.info("user_seq_no : {}",userUnlinkRequestDto.getUser_seq_no());
+		log.info("client_use_code : {}",userUnlinkRequestDto.getClient_user_code());
+
+		//header 설정
+		HttpHeaders httpHeaders = openBankUtil.makeAccessTokenHeader(accessToken);
+		httpHeaders.add("Content_Type","application/json;charset=UTF-8");
+
+		// body 설정
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("client_use_code", userUnlinkRequestDto.getClient_user_code());
+		parameters.add("user_seq_no", userUnlinkRequestDto.getUser_seq_no());
+
+		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
+
+		return restTemplate.exchange(base_url + "/user/close", HttpMethod.POST,
+			param, UserUnlinkResponseDto.class)
+			.getBody();
+
+	}
+
 }

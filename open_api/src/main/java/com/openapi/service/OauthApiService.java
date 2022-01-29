@@ -44,14 +44,9 @@ public class OauthApiService {
 	 */
 	public AuthrozationResponseDto authrizationClient() {
 		// HTTP Method GET
-		AuthorizationRequestDto requestDto = AuthorizationRequestDto.builder()
-			.response_type("code")
-			// .client_id(clientId)
-			.redirect_uri(redirect_uri)
-			.scope("login inquiry tranfer")
-			.state("12345678901234567890123456789012")
-			.auth_type("0")
-			.build();
+		AuthorizationRequestDto requestDto = new AuthorizationRequestDto("code", clientId, redirect_uri,
+			"login inquiry tranfer"
+			, "12345678901234567890123456789012", "0");
 
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("response_type", requestDto.getResponse_type());
@@ -94,18 +89,20 @@ public class OauthApiService {
 
 	/**
 	 * 토큰 갱신
+	 * POST 방식, 호출 uri : /oauth/2.0/token
+	 * request에 포함되어야 하는 값 : code(사용자 인증 성공 후 획득한 Authorization code)
 	 * 아직 시도는 안해봄₩
 	 */
 	public RefreshTokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto) {
 		log.info("refresh token start");
-		// POST 방식, 호출 uri : /oauth/2.0/token
 		// Header 설정
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Content_type", "application/x-www-form-urlencoded;charset=UTF-8");
-		// Body 설정
 
+		// Body 설정
 		refreshTokenRequestDto.setRefreshTokenRequestDto(clientId, clientSecret, "login inquiry transfer",
 			"refresh_token");
+
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("client_id", refreshTokenRequestDto.getClient_id());
 		parameters.add("client_secret", refreshTokenRequestDto.getClient_secret());

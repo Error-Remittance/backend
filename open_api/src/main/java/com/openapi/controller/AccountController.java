@@ -34,6 +34,7 @@ public class AccountController {
 
 	/**
 	 * 잔액조회
+	 *
 	 * fintech_use_num : 핀테크 이용번호 : 사용자가 오픈뱅킹에 계좌 등록 시 발급되는 가상의 계좌식별번호
 	 */
 	@GetMapping("/account/{fintech_use_num}/balance")
