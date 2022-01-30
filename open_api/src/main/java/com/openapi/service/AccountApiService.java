@@ -98,7 +98,8 @@ public class AccountApiService {
 			.queryParam("tran_dtime", accountTransactionListRequestDto.getTran_dtime())
 			.build();
 
-		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, transaction, AccountTransactionListResponseDto.class)
+		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, transaction,
+			AccountTransactionListResponseDto.class)
 			.getBody();
 	}
 

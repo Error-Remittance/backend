@@ -38,7 +38,7 @@ public class AccountController {
 	 * fintech_use_num : 핀테크 이용번호 : 사용자가 오픈뱅킹에 계좌 등록 시 발급되는 가상의 계좌식별번호
 	 */
 	@GetMapping("/account/{fintech_use_num}/balance")
-	public CommonResponse<InquiryBalanceResponseDto> requestBalance(@PathVariable String fintech_use_num){
+	public CommonResponse<InquiryBalanceResponseDto> requestBalance(@PathVariable String fintech_use_num) {
 		InquiryBalanceRequestDto inquiryBalanceRequestDto = new InquiryBalanceRequestDto();
 		inquiryBalanceRequestDto.setFintech_use_num(fintech_use_num);
 		return commonResponseMaker.makeSucceedCommonResponse(
@@ -50,7 +50,8 @@ public class AccountController {
 	 * request 포함 값 : fintech_use_num, from_date, to_date "yyyyMMdd" 형식
 	 */
 	@GetMapping("/account/transaction_list")
-	public CommonResponse<AccountTransactionListResponseDto> requestTransactionList(AccountTransactionListRequestDto accountTransactionListRequestDto){
+	public CommonResponse<AccountTransactionListResponseDto> requestTransactionList(
+		AccountTransactionListRequestDto accountTransactionListRequestDto) {
 		return commonResponseMaker.makeSucceedCommonResponse(
 			accountApiService.requestTransactionList(accountTransactionListRequestDto));
 	}
