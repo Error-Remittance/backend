@@ -38,7 +38,7 @@ public class OauthApiService {
 	@Value("${openbank.access-token}")
 	private String accessToken;
 
-	private final String redirect_uri = "http://localhost:8080/auth/openbank/callback/init";
+	private final String redirect_uri = "http://localhost:8080/auth/openbank/callback";
 	private final String base_url = "https://testapi.openbanking.or.kr";
 
 	/**
@@ -67,6 +67,7 @@ public class OauthApiService {
 
 	/**
 	 * 토큰 발급 요청
+	 * request 포함 내용 : code(사용자일련번호)
 	 */
 	public IssueTokenResponseDto requestToken(IssueTokenRequestDto issueTokenRequestDto) {
 		log.info("request token start");

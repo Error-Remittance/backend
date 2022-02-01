@@ -50,8 +50,8 @@ com/openapi/controller/TranferController.java
  com.openapi.controller.TranferController
 com/openapi/dto/account/InquiryBalanceResponseDto.java
  com.openapi.dto.account.InquiryBalanceResponseDto
-com/openapi/service/AccountApiService.java
- com.openapi.service.AccountApiService
+com/openapi/dto/oauth/AuthorizationResponseDto.java
+ com.openapi.dto.oauth.AuthorizationResponseDto
 com/openapi/service/OpenBankUtil.java
  com.openapi.service.OpenBankUtil
 com/openapi/service/UserApiService.java
@@ -64,16 +64,16 @@ com/openapi/dto/transfer/WithdrawRequestDto.java
  com.openapi.dto.transfer.WithdrawRequestDto
 com/openapi/dto/transfer/DepositResponseDto.java
  com.openapi.dto.transfer.DepositResponseDto
-com/openapi/controller/AccountController.java
- com.openapi.controller.AccountController
-com/openapi/dto/user/UserUnlinkRequestDto.java
- com.openapi.dto.user.UserUnlinkRequestDto
 com/openapi/dto/oauth/AuthorizationRequestDto.java
  com.openapi.dto.oauth.AuthorizationRequestDto
+com/openapi/dto/user/UserUnlinkRequestDto.java
+ com.openapi.dto.user.UserUnlinkRequestDto
+com/openapi/service/AccountApiService.java
+ com.openapi.service.AccountApiService
+com/openapi/controller/AccountController.java
+ com.openapi.controller.AccountController
 com/openapi/service/OauthApiService.java
  com.openapi.service.OauthApiService
-com/openapi/dto/oauth/AuthorizationResponseDto.java
- com.openapi.dto.oauth.AuthorizationResponseDto
 com/openapi/controller/HomeController.java
  com.openapi.controller.HomeController
 com/openapi/controller/OauthController.java
