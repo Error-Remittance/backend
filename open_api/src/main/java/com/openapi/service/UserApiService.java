@@ -41,6 +41,7 @@ public class UserApiService {
 
 	/**
 	 * 사용자정보조회
+	 * 필요 파라미터 : user_seq_no(사용자 일련 번호)
 	 */
 	public UserInfoResponseDto requestUserInfo(UserInfoRequestDto userInfoRequestDto) {
 		String url = base_url + "/user/me";
@@ -55,6 +56,7 @@ public class UserApiService {
 
 	/**
 	 * 사용자 탈퇴
+	 * 필요 파라미터 : client_use_code(이용기관코드) , user_seq_no(사용자 일련번호)
 	 */
 	public UserUnlinkResponseDto unlinkUser(UserUnlinkRequestDto userUnlinkRequestDto) {
 		userUnlinkRequestDto.setUserUnlinkRequestDto(useCode);

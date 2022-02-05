@@ -24,6 +24,12 @@ public class ReturnRequestController extends AppApiV1Controller {
 	private final ReturnRequestService returnRequestService;
 	private final CommonResponseMaker commonResponseMaker;
 
+	/**
+	 * 반환 기록을 만드는 것?
+	 * @param requestDto
+	 * @return
+	 * @throws IOException
+	 */
 	@PostMapping("/return_requests")
 	public CommonResponse<Void> makeReturnRequest(
 		@RequestBody MakeReturnRequestRequestDto requestDto) throws IOException {
@@ -33,6 +39,12 @@ public class ReturnRequestController extends AppApiV1Controller {
 		return commonResponseMaker.makeEmptyInfoCommonResponse(ResponseCode.SUCCESS);
 	}
 
+	/**
+	 * sent user를 통해 return request를 가져
+	 * @param userId
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("/return_requests/sending")
 	public CommonResponse<GetSentReturnRequestsResponseDto> getSentReturnRequest(
 		@RequestParam final String userId) throws IOException {
@@ -43,6 +55,9 @@ public class ReturnRequestController extends AppApiV1Controller {
 		return commonResponseMaker.makeSucceedCommonResponse(responseDto);
 	}
 
+	/**
+	 * receiceuser를 통해 return request 가져
+	 */
 	@GetMapping("/return_requests/receiving")
 	public CommonResponse<GetReceivedReturnRequestsResponseDto> getReceivedReturnRequest(
 		@RequestParam final String userId) throws IOException {
@@ -53,6 +68,14 @@ public class ReturnRequestController extends AppApiV1Controller {
 		return commonResponseMaker.makeSucceedCommonResponse(responseDto);
 	}
 
+	/**
+	 * 착오송금 반환 완료한 뒤 거래내역에 추가?
+	 * 송금이 완료 되었으면 거래내역을 새로고침할때 자동으로 될 듯
+	 * 필요한지 확인해봐야함
+	 * @param returnRequestId
+	 * @return
+	 * @throws IOException
+	 */
 	@PostMapping("/return_requests/accept")
 	public CommonResponse<Void> acceptReturnRequest(
 		@RequestParam final long returnRequestId) throws IOException {

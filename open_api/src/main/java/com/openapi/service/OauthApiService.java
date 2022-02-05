@@ -43,6 +43,7 @@ public class OauthApiService {
 
 	/**
 	 * 사용자 인증 받기// 최초
+	 * 프론트엔드에서 직접 호출하
 	 */
 	public AuthorizationResponseDto authrizationClient() {
 		// HTTP Method GET
@@ -95,7 +96,6 @@ public class OauthApiService {
 	 * 토큰 갱신
 	 * POST 방식, 호출 uri : /oauth/2.0/token
 	 * request에 포함되어야 하는 값 : code(사용자 인증 성공 후 획득한 Authorization code)
-	 * 아직 시도는 안해봄₩
 	 */
 	public RefreshTokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto) {
 		log.info("refresh token start");

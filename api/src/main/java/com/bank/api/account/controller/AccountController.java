@@ -22,6 +22,12 @@ public class AccountController extends AppApiV1Controller {
 	private final AccountService accountService;
 	private final CommonResponseMaker commonResponseMaker;
 
+	/**
+	 * 계좌 내역 update?
+	 * @param requestDto
+	 * @return
+	 * @throws IOException
+	 */
 	@PostMapping("/accounts/update")
 	public CommonResponse<UpdateAllAccountResponseDto> UpdateAllAccounts(
 		@RequestBody UpdateAllAccountRequestDto requestDto) throws IOException {
@@ -32,6 +38,13 @@ public class AccountController extends AppApiV1Controller {
 		return commonResponseMaker.makeSucceedCommonResponse(responseDto);
 	}
 
+	/**
+	 * 계좌 조회 -> 잔액조회 등?
+	 * @param userId
+	 * @param password
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("/accounts")
 	public CommonResponse<GetAccountListResponseDto> GetAccountList(
 		@RequestParam final String userId, @RequestParam final String password) throws IOException {

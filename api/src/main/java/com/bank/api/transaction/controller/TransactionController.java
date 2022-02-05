@@ -21,6 +21,14 @@ public class TransactionController extends AppApiV1Controller {
 	private final TransactionService transactionService;
 	private final CommonResponseMaker commonResponseMaker;
 
+	/**
+	 * 아마 거래 내역 조회?
+	 * @param accountId
+	 * @param year
+	 * @param month
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("/transactions")
 	public CommonResponse<GetTransactionListResponseDto> GetTransactionListPerMonth(
 		@RequestParam final long accountId, @RequestParam final int year, @RequestParam final int month)

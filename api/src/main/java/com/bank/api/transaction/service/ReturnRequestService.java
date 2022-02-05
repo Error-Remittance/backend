@@ -123,6 +123,12 @@ public class ReturnRequestService {
 		return null;
 	}
 
+	/**
+	 * Return request가 처리되었는지? 확인
+	 * @param returnRequestId
+	 * @return
+	 * @throws IOException
+	 */
 	@Transactional
 	public Void reportReturnRequest(final Long returnRequestId) throws IOException {
 
