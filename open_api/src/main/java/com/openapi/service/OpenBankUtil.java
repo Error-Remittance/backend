@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OpenBankUtil {
+
 	/**
 	 * 은행 거래 고유번호 랜덤 생성
 	 */
-
 	public String getRandomNumber(String useCode) {
 
 		Random rand = new Random();
@@ -20,7 +20,7 @@ public class OpenBankUtil {
 		for (int i = 0; i < 8; i++) {
 			rst += Integer.toString(rand.nextInt(9));
 		}
-		return useCode +"U" +  rst;
+		return useCode + "U" + rst;
 	}
 
 	/**
