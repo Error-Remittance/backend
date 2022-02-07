@@ -17,7 +17,7 @@ import com.bank.component.common.dto.CommonResponse;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class AccountController extends AppApiV1Controller {
+public class AccountController {
 
 	private final AccountService accountService;
 	private final CommonResponseMaker commonResponseMaker;

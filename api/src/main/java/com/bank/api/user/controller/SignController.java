@@ -1,6 +1,5 @@
 package com.bank.api.user.controller;
 
-import com.bank.api.account.controller.AppApiV1Controller;
 import com.bank.api.user.dto.AppUserDto;
 import com.bank.api.user.dto.SignInRequestDto;
 import com.bank.api.user.dto.SignUpRequestDto;
@@ -20,7 +19,7 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class SignController extends AppApiV1Controller {
+public class SignController {
 
 	private final AppUserService userService;
 	private final CommonResponseMaker commonResponseMaker;

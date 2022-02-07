@@ -28,6 +28,7 @@ public class AppUserService {
 	@Transactional
 	public AppUserVo completeSignUp(SignUpRequestVo requestVo) {
 
+		// 사용자를 구분하는 방법 찾아야함
 		final boolean isValidUserId = !userRepository.findTopByUserId(requestVo.getUserId()).isPresent();
 
 		if (!isValidUserId) {

@@ -1,3 +1,11 @@
+openbank:
+  useCode: M202200139
+  client-id: 03366178-450b-46af-a2bf-8af076571fec
+  client-secret: c9b400bd-63dc-45a4-bc84-9d2dad8efa9c
+  access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAxMDAyOTU2Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2NTE0NjkwNzUsImp0aSI6IjZkY2I2NjZiLWEzZGYtNDkzOC05MjBiLTkzN2Q2NzBjZTc2ZCJ9.Xaja4p9ArjejmtpENqWbQ8JAWyPvDJfTC6tKt5Pkwws
+  refresh-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAxMDAyOTU2Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2NTIzMzMwNzUsImp0aSI6IjgxODRhZmQyLWVhNjktNGFhYS1iZmMyLTFkZDQ4MWJkYWUyYyJ9.wpGL1P66H2gIMzjtWfWQEIH7q32k6TcpY-AdP6Tv5Kk
+  user_seq_no: 1101002956
+
 spring:
   application:
     name: api
@@ -22,7 +30,6 @@ spring:
         format_sql: true # sql 로그를 포매팅해서 보여줌
 
 
-  출처: https://sanghaklee.tistory.com/65 [이상학의 개발블로그]
 logging:
   level:
     org:

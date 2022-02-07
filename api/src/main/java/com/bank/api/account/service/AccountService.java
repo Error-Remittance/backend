@@ -65,6 +65,7 @@ public class AccountService {
 			"  \"dataBody\": {}\n" +
 			"}";
 
+		// header를 만들어
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		headers.add("appkey", appkey);
@@ -79,11 +80,14 @@ public class AccountService {
 		Gson gson = new Gson();
 		LoadAccountDataBody loadAccountDataBody = gson.fromJson(responseEntity.getBody(), LoadAccountDataBody.class);
 
+		// user를 가져와
 		final Optional<AppUser> userOptional = userRepository.findTopByUserId(requestVo.getUserId());
 
+		// 없으면 에러를 내
 		final AppUser findUser = userOptional.orElseThrow(() ->
 			new CommonException(ResponseCode.USER_NOT_EXISTED));
 
+		// 패스워드를 비교해
 		if (!passwordEncoder.matches(requestVo.getPassword(), findUser.getPassword())) {
 			throw new CommonException(ResponseCode.INVALID_PASSWORD);
 		}

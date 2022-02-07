@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-import com.bank.api.account.controller.AppApiV1Controller;
 import com.bank.api.transaction.dto.GetReceivedReturnRequestsResponseDto;
 import com.bank.api.transaction.dto.GetSentReturnRequestsResponseDto;
 import com.bank.api.transaction.dto.MakeReturnRequestRequestDto;
@@ -19,7 +18,7 @@ import com.bank.component.common.dto.CommonResponse;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class ReturnRequestController extends AppApiV1Controller {
+public class ReturnRequestController {
 
 	private final ReturnRequestService returnRequestService;
 	private final CommonResponseMaker commonResponseMaker;

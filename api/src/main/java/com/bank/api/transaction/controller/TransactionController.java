@@ -1,6 +1,5 @@
 package com.bank.api.transaction.controller;
 
-import com.bank.api.account.controller.AppApiV1Controller;
 import com.bank.api.transaction.dto.GetTransactionListResponseDto;
 import com.bank.api.transaction.service.TransactionService;
 import com.bank.component.common.CommonResponseMaker;
@@ -16,7 +15,7 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class TransactionController extends AppApiV1Controller {
+public class TransactionController {
 
 	private final TransactionService transactionService;
 	private final CommonResponseMaker commonResponseMaker;
