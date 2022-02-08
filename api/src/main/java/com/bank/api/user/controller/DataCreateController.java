@@ -24,7 +24,7 @@ public class DataCreateController {
 	@PostMapping("/data/create")
 	public CommonResponse<Void> dataCreate() throws IOException {
 
-		dataCreateService.createData();
+		// dataCreateService.createData();
 
 		return commonResponseMaker.makeEmptyInfoCommonResponse(ResponseCode.SUCCESS);
 	}

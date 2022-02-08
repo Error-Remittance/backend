@@ -1,15 +1,9 @@
 package com.bank.api.user.service;
 
-import java.util.Optional;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bank.component.common.constant.ResponseCode;
-import com.bank.component.common.exception.CommonException;
-import com.bank.component.user.domain.AppUser;
-import com.bank.component.user.domain.FCMToken;
 import com.bank.component.user.repository.AppUserRepository;
 import com.bank.component.user.vo.AppUserVo;
 import com.bank.component.user.vo.SignInRequestVo;

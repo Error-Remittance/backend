@@ -18,7 +18,7 @@ spring:
 
   jpa:
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQLInnoDBDialect
     generate-ddl: true
     hibernate:
       ddl-auto: create
@@ -29,13 +29,3 @@ spring:
       hibernate: # custom options
         format_sql: true # sql 로그를 포매팅해서 보여줌
 
-
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE

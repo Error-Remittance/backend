@@ -7,21 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-@EqualsAndHashCode(of = "id", callSuper = false)
-@Table(name = "bank")
 public class Bank {
 
-	@Id @GeneratedValue
-	@Column(name = "bank_id")
-	private Long id;
+	@Id
+	private String bankCodeStd;
 
-	private String name;
+	private String bankName;
 
-	public Bank(String name) {
-		this.name = name;
-	}
+	// public Bank(String name) {
+	// 	this.name = name;
+	// }
 }

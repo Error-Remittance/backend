@@ -10,16 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bank.api.user.service.FCMService;
 import com.bank.component.account.vo.GetReceivedReturnRequestsResponseVo;
-import com.bank.component.common.constant.ResponseCode;
-import com.bank.component.common.exception.CommonException;
-import com.bank.component.transaction.domain.ReturnRequest;
-import com.bank.component.transaction.domain.Transaction;
-import com.bank.component.transaction.repository.ReturnRequestRepository;
 import com.bank.component.transaction.repository.TransactionRepository;
 import com.bank.component.transaction.vo.GetSentReturnRequestsResponseVo;
 import com.bank.component.transaction.vo.MakeReturnRequestRequestVo;
-import com.bank.component.transaction.vo.ReturnRequestVo;
-import com.bank.component.user.domain.AppUser;
 import com.bank.component.user.repository.AppUserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +25,7 @@ public class ReturnRequestService {
 	private final FCMService fcmService;
 	private final AppUserRepository userRepository;
 	private final TransactionRepository transactionRepository;
-	private final ReturnRequestRepository returnRequestRepository;
+	// private final ReturnRequestRepository returnRequestRepository;
 
 	@Transactional
 	public void makeReturnRequest(final MakeReturnRequestRequestVo requestVo) throws IOException {
