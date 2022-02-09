@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Bank {
 
 	@Id
+	@Column(name = "bank_code_std" , length = 3)
 	private String bankCodeStd;
 
 	private String bankName;

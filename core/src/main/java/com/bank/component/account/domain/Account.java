@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,18 +24,18 @@ import javax.persistence.OneToOne;
 public class Account {
 
 	@Id
-	@Column(name = "fintech_use_num", unique = true)
+	@Column(name = "fintech_use_num", length = 24)
 	private String fintechUseNum;
 
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bank_code_std")
 	private Bank bank;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "app_user_info_id")
+	@JoinColumn(name = "user_seq_no")
 	private AppUserInfo userInfo;
 
-	@OneToMany
-	@JoinColumn(name = "transaction_id")
+	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions = new ArrayList<>();
 
 	private String savingsBankName;

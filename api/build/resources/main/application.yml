@@ -14,11 +14,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/bank_backend?useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: bank_admin
-    password: 1234
+    password: bank1234
 
   jpa:
     database: mysql
-    database-platform: org.hibernate.dialect.MySQLInnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
     hibernate:
       ddl-auto: create
