@@ -1,7 +1,7 @@
 package com.bank.component.account.domain;
 
 import com.bank.component.transaction.domain.Transaction;
-import com.bank.component.user.domain.AppUserInfo;
+import com.bank.component.user.domain.UserInfo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +33,7 @@ public class Account {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_seq_no")
-	private AppUserInfo userInfo;
+	private UserInfo userInfo;
 
 	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions = new ArrayList<>();
@@ -53,9 +53,9 @@ public class Account {
 	/**
 	 * 양방향 연관관계 메서드
 	 */
-	public void setUserInfo(AppUserInfo appUserInfo){
-		this.userInfo = userInfo;
-		userInfo.getAccounts().add(this);
+	public void setUserInfo(UserInfo userInfo){
+		this.userInfo = this.userInfo;
+		this.userInfo.getAccounts().add(this);
 	}
 	// public Account(String number, String name, double balance, AppUser user, Bank bank) {
 	// 	this.number = number;

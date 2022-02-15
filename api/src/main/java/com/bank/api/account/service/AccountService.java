@@ -1,31 +1,18 @@
 package com.bank.api.account.service;
 
 import java.io.IOException;
-import java.util.Optional;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import com.bank.api.account.dto.loadaccountresponsedto.LoadAccountDataBody;
-import com.bank.component.account.domain.Account;
-import com.bank.component.account.domain.Bank;
 import com.bank.component.account.repository.AccountRepository;
 import com.bank.component.account.repository.BankRepository;
 import com.bank.component.account.vo.GetAccountListResponseVo;
 import com.bank.component.account.vo.UpdateAllAccountRequestVo;
 import com.bank.component.account.vo.UpdateAllAccountResponseVo;
-import com.bank.component.common.constant.ResponseCode;
-import com.bank.component.common.exception.CommonException;
-import com.bank.component.user.domain.AppUser;
-import com.bank.component.user.repository.AppUserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+import com.bank.component.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class AccountService {
-	private final AppUserRepository userRepository;
+	private final UserRepository userRepository;
 	private final AccountRepository accountRepository;
 	private final BankRepository bankRepository;
 	private final RestTemplate restTemplate;

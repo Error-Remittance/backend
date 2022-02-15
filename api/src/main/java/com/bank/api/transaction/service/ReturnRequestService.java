@@ -1,9 +1,6 @@
 package com.bank.api.transaction.service;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +10,7 @@ import com.bank.component.account.vo.GetReceivedReturnRequestsResponseVo;
 import com.bank.component.transaction.repository.TransactionRepository;
 import com.bank.component.transaction.vo.GetSentReturnRequestsResponseVo;
 import com.bank.component.transaction.vo.MakeReturnRequestRequestVo;
-import com.bank.component.user.repository.AppUserRepository;
+import com.bank.component.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ReturnRequestService {
 	private final FCMService fcmService;
-	private final AppUserRepository userRepository;
+	private final UserRepository userRepository;
 	private final TransactionRepository transactionRepository;
 	// private final ReturnRequestRepository returnRequestRepository;
 

@@ -4,7 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bank.component.user.repository.AppUserRepository;
+import com.bank.component.user.repository.UserRepository;
 import com.bank.component.user.vo.AppUserVo;
 import com.bank.component.user.vo.SignInRequestVo;
 import com.bank.component.user.vo.SignUpRequestVo;
@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class AppUserService {
-	private final AppUserRepository userRepository;
+	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 
 	@Transactional
