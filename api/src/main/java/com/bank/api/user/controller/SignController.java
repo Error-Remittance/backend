@@ -24,7 +24,7 @@ public class SignController {
 	private final UserService userService;
 	private final CommonResponseMaker commonResponseMaker;
 
-	@PostMapping("/sign_up")
+	@PostMapping("/api/sign_up")
 	public CommonResponse<AppUserDto> completeSignUp(@RequestBody SignUpRequestDto requestDto) throws IOException {
 
 		final AppUserDto responseDto = AppUserDto.of(userService.completeSignUp(requestDto));
