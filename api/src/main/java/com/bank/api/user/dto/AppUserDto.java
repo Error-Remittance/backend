@@ -1,5 +1,6 @@
 package com.bank.api.user.dto;
 
+import com.bank.component.user.domain.User;
 import com.bank.component.user.vo.AppUserVo;
 
 import lombok.Builder;
@@ -10,17 +11,12 @@ import lombok.ToString;
 @Builder
 @ToString
 public class AppUserDto {
-	private final Long appUserId;
-	private final String userId;
-	private final String name;
-	private final String phoneNumber;
 
-	public static AppUserDto of(AppUserVo vo) {
+	private String username;
+
+	public static AppUserDto of(User user) {
 		return builder()
-			.appUserId(vo.getAppUserId())
-			.userId(vo.getUserId())
-			.name(vo.getName())
-			.phoneNumber(vo.getPhoneNumber())
+			.username(user.getUsername())
 			.build();
 	}
 }

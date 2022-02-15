@@ -21,7 +21,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     open-in-view: false
 

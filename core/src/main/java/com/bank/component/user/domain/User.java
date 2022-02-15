@@ -39,11 +39,13 @@ public class User {
 		return new ArrayList<>();
 	}
 
-	public void settingUser(String password) {
+	public User(String username, String password) {
+		this.username = username;
 		this.password = password;
 		this.roles = "ROLE_USER";
 		this.enabled = true;
 	}
+
 
 	public AppUserVo toVo() {
 		return AppUserVo.builder()

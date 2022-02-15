@@ -1,26 +1,18 @@
 package com.bank.api.user.dto;
 
-import com.bank.component.user.vo.SignUpRequestVo;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Builder
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class SignUpRequestDto {
-	private final String userId;
-	private final String password;
-	private final String name;
-	private final String phoneNumber;
+	private String username;
+	private String password;
 
-	public SignUpRequestVo toVo() {
-		return SignUpRequestVo.builder()
-			.userId(userId)
-			.password(password)
-			.name(name)
-			.phoneNumber(phoneNumber)
-			.build();
-	}
 }

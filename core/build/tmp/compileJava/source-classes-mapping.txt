@@ -23,8 +23,9 @@ com/bank/component/common/dto/CommonResponse.java
 com/bank/component/account/vo/UpdateAllAccountRequestVo.java
  com.bank.component.account.vo.UpdateAllAccountRequestVo
  com.bank.component.account.vo.UpdateAllAccountRequestVo$UpdateAllAccountRequestVoBuilder
-com/bank/component/user/repository/UserRepository.java
- com.bank.component.user.repository.UserRepository
+com/bank/component/transaction/vo/TransactionVo.java
+ com.bank.component.transaction.vo.TransactionVo
+ com.bank.component.transaction.vo.TransactionVo$TransactionVoBuilder
 com/bank/component/account/vo/GetAccountListResponseVo.java
  com.bank.component.account.vo.GetAccountListResponseVo
  com.bank.component.account.vo.GetAccountListResponseVo$GetAccountListResponseVoBuilder
@@ -53,12 +54,6 @@ com/bank/component/common/CommonResponseMaker.java
 com/bank/component/user/vo/AppUserVo.java
  com.bank.component.user.vo.AppUserVo
  com.bank.component.user.vo.AppUserVo$AppUserVoBuilder
-com/bank/component/user/vo/SignUpRequestVo.java
- com.bank.component.user.vo.SignUpRequestVo
- com.bank.component.user.vo.SignUpRequestVo$SignUpRequestVoBuilder
-com/bank/component/transaction/vo/TransactionVo.java
- com.bank.component.transaction.vo.TransactionVo
- com.bank.component.transaction.vo.TransactionVo$TransactionVoBuilder
 com/bank/component/user/domain/UserInfo.java
  com.bank.component.user.domain.UserInfo
 com/bank/component/account/domain/Account.java
@@ -67,3 +62,5 @@ com/bank/component/user/domain/User.java
  com.bank.component.user.domain.User
 com/bank/component/transaction/domain/Transaction.java
  com.bank.component.transaction.domain.Transaction
+com/bank/component/user/repository/UserRepository.java
+ com.bank.component.user.repository.UserRepository
