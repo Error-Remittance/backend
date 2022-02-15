@@ -21,7 +21,7 @@ import com.bank.component.account.domain.Account;
 @Entity
 public class Transaction {
 
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "transaction_id")
 	private Long id;
 
