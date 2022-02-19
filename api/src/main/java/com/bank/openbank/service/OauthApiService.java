@@ -15,8 +15,6 @@ import com.bank.openbank.dto.oauth.AuthorizationRequestDto;
 import com.bank.openbank.dto.oauth.AuthorizationResponseDto;
 import com.bank.openbank.dto.oauth.IssueTokenRequestDto;
 import com.bank.openbank.dto.oauth.IssueTokenResponseDto;
-import com.bank.openbank.dto.oauth.RefreshTokenRequestDto;
-import com.bank.openbank.dto.oauth.RefreshTokenResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -93,34 +91,6 @@ public class OauthApiService {
 
 		return restTemplate.exchange(base_url + "/oauth/2.0/token", HttpMethod.POST,
 			param, IssueTokenResponseDto.class).getBody();
-	}
-
-	/**
-	 * 토큰 갱신
-	 * POST 방식, 호출 uri : /oauth/2.0/token
-	 * request에 포함되어야 하는 값 : code(사용자 인증 성공 후 획득한 Authorization code)
-	 */
-	public RefreshTokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto) {
-		log.info("refresh token start");
-		// Header 설정
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("Content_type", "application/x-www-form-urlencoded;charset=UTF-8");
-
-		// Body 설정
-		refreshTokenRequestDto.setRefreshTokenRequestDto(clientId, clientSecret, "login inquiry transfer",
-			"refresh_token");
-
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("client_id", refreshTokenRequestDto.getClient_id());
-		parameters.add("client_secret", refreshTokenRequestDto.getClient_secret());
-		parameters.add("refresh_token", refreshTokenRequestDto.getRefresh_token());
-		parameters.add("scope", refreshTokenRequestDto.getScope());
-		parameters.add("grant_type", refreshTokenRequestDto.getGrant_type());
-
-		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
-
-		return restTemplate.exchange(base_url + "/oauth/2.0/token", HttpMethod.POST, param,
-			RefreshTokenResponseDto.class).getBody();
 	}
 
 }
