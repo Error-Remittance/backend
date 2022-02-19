@@ -42,9 +42,15 @@ public class OauthApiService {
 	private final String base_url = "https://testapi.openbanking.or.kr";
 
 	/**
-	 * 사용자 인증 받기// 최초
-	 * 프론트엔드에서 직접 호출하
-	 */
+	 * 사용자 인증 받기 -> 자체 인증 방식 사용
+	 * 클라이언트에서
+	 * http url : https://openapi.openbanking.or.kr/oauth/2.0/authorize 호출
+	 * method : GET
+	 * 로 호출해야함
+	 * 등록된 callback url로 redirect
+	 * callback url에서 바로 토큰 요청하면 될 것
+	 *
+	 * 아래 API 호출 메서드는 그냥 만들어 놓은 것	 */
 	public AuthorizationResponseDto authrizationClient() {
 		// HTTP Method GET
 		AuthorizationRequestDto authorizationRequestDto = new AuthorizationRequestDto("code", clientId,
@@ -68,22 +74,19 @@ public class OauthApiService {
 
 	/**
 	 * 토큰 발급 요청
-	 * request 포함 내용 : code(사용자일련번호)
 	 */
 	public IssueTokenResponseDto requestToken(IssueTokenRequestDto issueTokenRequestDto) {
 		log.info("request token start");
-		log.info("code : {}", issueTokenRequestDto.getCode());
 		// POST 방식
 		// HTTP header
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-		issueTokenRequestDto.setBankRequestToken(clientId, clientSecret, redirect_uri, "authorization_code");
+		issueTokenRequestDto.setBankRequestToken(clientId, clientSecret, "sa", "client_credentials");
 
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("code", issueTokenRequestDto.getCode());
 		parameters.add("client_id", issueTokenRequestDto.getClient_id());
 		parameters.add("client_secret", issueTokenRequestDto.getClient_secret());
-		parameters.add("redirect_uri", issueTokenRequestDto.getRedirect_uri());
+		parameters.add("scope", issueTokenRequestDto.getScope());
 		parameters.add("grant_type", issueTokenRequestDto.getGrant_type());
 
 		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<>(parameters, httpHeaders);
